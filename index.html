@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Olimpíadas</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@400;500;700&family=Roboto:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./src/css/reset.css">
+  <link rel="stylesheet" href="./src/css/style.css">
+</head>
+
+<body>
+  <header>
+    <img src="./src/img/logo.svg" alt="anéis olímpicos">
+  </header>
+
+  <section class="search-box">
+    <label for="country">Pesquisa</label>
+    <div class="input-wrapper">
+      <img src="./src/img/search.svg" alt="lupa">
+      <input id="country-search" placeholder="Pesquisar por país" type="text">
+    </div><button id="search-box__button">Pesquisar</button>
+    <p>Ex: Brasil</p>
+  </section>
+
+  <section id="table-wrapper" class="table-wrapper">
+  </section>
+
+  <script type="module" src="./src/js/script.js"></script>
+</body>
+
+</html>

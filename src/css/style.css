@@ -1,0 +1,162 @@
+:root {
+  --color-primary-1: #939EDF;
+  --color-primary-2: #4A60CC;
+  --color-primary-3: #4058CA;
+  --color-primary-4: #364FC7;
+
+  --grey-1: #F8F9FA;
+  --grey-2: #E9ECEF;
+  --grey-3: #868E96;
+  --grey-4: #212529;
+}
+
+button {
+  cursor: pointer;
+}
+
+header {
+  text-align: center;
+
+  background: var(--color-primary-4);
+}
+
+header img {
+  margin: 17px 0 18px;
+
+  vertical-align: bottom;
+}
+
+.search-box {
+  background: var(--grey-2);
+
+  padding: 17px 110px 103px;
+}
+
+.search-box label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+}
+
+.search-box .input-wrapper {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.search-box .input-wrapper img {
+  position: absolute;
+
+  top: 13px;
+  left: 15px;
+}
+
+.search-box input {
+  border: none;
+
+  padding: 11.5px 140px 11.5px 39px;
+  color: #828282;
+
+  font-size: 14px;
+  line-height: 17px;
+
+  border-radius: 8px;
+}
+
+.search-box button {
+  background: var(--color-primary-4);
+  color: #FFF;
+
+  padding: 10.5px 15px;
+  margin-left: 8px;
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+
+  border: none;
+  border-radius: 8px;
+}
+
+.search-box p {
+  color: var(--grey-3);
+
+  margin-top: 10px;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+}
+
+.table-wrapper {
+  margin-bottom: 164px;
+}
+
+table {
+  margin: -70px auto 0;
+
+  border-collapse: collapse;
+
+  text-align: left;
+}
+
+thead {
+  background: var(--color-primary-4);
+  color: #FFF;
+}
+
+thead th {
+  padding: 27px 40px;
+  
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+thead th:nth-child(2) {
+  width: 477px;
+
+  padding: 27px 31px;
+}
+
+thead th + th {
+  border-left: 2px solid #5E72D2;
+}
+
+tbody {
+  border-color: var(--grey-2);
+  color: #878787;
+
+  text-align: center;
+
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+tbody tr:nth-child(odd) {
+  background: var(--grey-1);
+}
+
+tbody td:nth-child(2) {
+  text-align: left;
+
+  padding: 25px 0 25px 31px;
+}
+
+tbody td img {
+  width: 28px;
+  height: 20px;
+
+  border-radius: 2px;
+
+  vertical-align: bottom;
+
+  margin-right: 15px;
+}
+
+tbody td + td {
+  border-left: 2px solid var(--grey-2);
+}
