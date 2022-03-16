@@ -4,6 +4,12 @@ class Interface {
   static countryInput = document.getElementById('country-search')
   static tableWrapper = document.getElementById('table-wrapper')
   static searchButton = document.getElementById('search-box__button')
+  static orderButtons = {
+    id: 'down',
+    medal_gold: 'down',
+    medal_silver: 'down',
+    medal_bronze: 'down'
+  }
 
   static createTable(tableData) {
     const table = document.createElement('table')
@@ -16,12 +22,18 @@ class Interface {
     const bronze = document.createElement('th')
     const total = document.createElement('th')
 
-    position.innerText = 'Posição'
+    const posButton = this.createButton('id', 'Posição')
+    const goldButton = this.createButton('medal_gold', 'Ouro')
+    const silverButton = this.createButton('medal_silver', 'Prata')
+    const bronzeButton = this.createButton('medal_bronze', 'Bronze')
+
     country.innerText = 'País'
-    gold.innerText = 'Ouro'
-    silver.innerText = 'Prata'
-    bronze.innerText = 'Bronze'
     total.innerText = 'Total'
+
+    position.appendChild(posButton)
+    gold.appendChild(goldButton)
+    silver.appendChild(silverButton)
+    bronze.appendChild(bronzeButton)
 
     firstRow.appendChild(position)
     firstRow.appendChild(country)
@@ -44,7 +56,7 @@ class Interface {
       const cTotal = document.createElement('td')
 
       cPosition.innerText = `${tableData[i].id}°`
-      cName.innerHTML = `<img src="${tableData[i].flag_url}" alt="Bandeira do ${tableData[i].country}" /> ${tableData[i].country}`
+      cName.innerHTML = `<img src="${tableData[i].flag_url}" alt="Bandeira do país, ${tableData[i].country}." /> ${tableData[i].country}`
       cGold.innerText = `${tableData[i].medal_gold}`
       cSilver.innerText = `${tableData[i].medal_silver}`
       cBronze.innerText = `${tableData[i].medal_bronze}`
@@ -64,6 +76,29 @@ class Interface {
     table.appendChild(tableHead)
     table.appendChild(tableBody)
     this.tableWrapper.appendChild(table)
+  }
+
+  static createButton(name, text) {
+    const button = document.createElement('button')
+
+    button.innerText = text
+    button.classList.add(`arrow-${this.orderButtons[name]}`)
+    button.addEventListener('click', function () {
+      if (this.orderButtons[name] === 'down') {
+        this.orderButtons[name] = 'up'
+      } else {
+        this.orderButtons[name] = 'down'
+      }
+
+      this.resetTables()
+      this.createTable(CountryDB.sortBy(
+        CountryDB.findByName(this.countryInput.value),
+        name,
+        this.orderButtons[name]
+      ))
+    }.bind(this))
+
+    return button
   }
 
   static addListener() {

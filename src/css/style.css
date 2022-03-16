@@ -90,13 +90,16 @@ header img {
   font-size: 10px;
 }
 
-.table-wrapper {
+.table-section {
   margin-bottom: 164px;
 }
 
-table {
+.table-wrapper {
+  width: 1375px;
   margin: -70px auto 0;
+}
 
+table {
   border-collapse: collapse;
 
   text-align: left;
@@ -107,12 +110,47 @@ thead {
   color: #FFF;
 }
 
-thead th {
-  padding: 27px 40px;
+thead th, thead th button {
+  padding: 15px 40px;
   
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: 500;
+}
+
+thead th button {
+  padding: 12px 55px 12px 20px;
+  border-radius: 5px;
+  background: var(--color-primary-3);
+  border: none;
+  color: #FFF;
+  position: relative;
+}
+
+thead th button::after {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+
+  content: '';
+
+  width: 4.5px;
+  height: 4.5px;
+
+  border-radius: 1px;
+
+  border-right: 3px solid #FFF;
+  border-bottom: 3px solid #FFF;
+}
+
+thead th button.arrow-down::after {
+  transform: rotate(45deg)
+}
+
+thead th button.arrow-up::after {
+  top: 18px;
+
+  transform: rotate(225deg)
 }
 
 thead th:nth-child(2) {
@@ -141,6 +179,7 @@ tbody tr:nth-child(odd) {
 }
 
 tbody td:nth-child(2) {
+  min-width: 477px;
   text-align: left;
 
   padding: 25px 0 25px 31px;
@@ -159,4 +198,34 @@ tbody td img {
 
 tbody td + td {
   border-left: 2px solid var(--grey-2);
+}
+
+@media only screen and (max-width: 1400px) {
+  .table-section {
+    padding-left: 16px;
+  }
+
+  .table-wrapper {
+    width: calc(100vw - 16px);
+    overflow-x: auto;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .search-box {
+    display: flex;
+    flex-direction: column;
+    padding: 29px 15px 91px 16px;
+  }
+
+  .search-box input,
+  .search-box button {
+    width: 100%;
+  }
+
+  .search-box button {
+    margin-left: 0;
+    margin-top: 7px;
+    order: 4;
+  }
 }

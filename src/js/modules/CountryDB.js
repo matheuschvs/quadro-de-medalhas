@@ -11,6 +11,14 @@ class CountryDB {
     )
   }
 
+  static sortBy(data, property, order) {
+    if (order === 'down') {
+      return data.sort((a, b) => a[property] - b[property])
+    } else {
+      return data.sort((a, b) => b[property] - a[property])
+    }
+  }
+
   static async fetchCountries() {
     try {
       const response = await fetch('https://kenzie-olympics.herokuapp.com/paises')
