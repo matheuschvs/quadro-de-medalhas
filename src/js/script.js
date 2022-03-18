@@ -1,7 +1,9 @@
 import { Interface } from './modules/Interface.js'
 import { CountryDB } from './modules/CountryDB.js'
 
-Interface.addListener()
+const countries = await CountryDB.fetchCountries()
+const countryDB = new CountryDB(countries)
 
-await CountryDB.fetchCountries()
-Interface.createTable(CountryDB.getAll())
+const instance = new Interface(countryDB)
+
+instance.createTable(countryDB.countries)

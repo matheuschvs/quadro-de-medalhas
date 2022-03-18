@@ -1,17 +1,22 @@
 import { CountryDB } from './CountryDB.js'
 
 class Interface {
-  static countryInput = document.getElementById('country-search')
-  static tableWrapper = document.getElementById('table-wrapper')
-  static searchButton = document.getElementById('search-box__button')
-  static orderButtons = {
-    id: 'down',
-    medal_gold: 'down',
-    medal_silver: 'down',
-    medal_bronze: 'down'
+  constructor(database) {
+    this._database = database
+    this._countryInput = document.getElementById('country-search')
+    this._tableWrapper = document.getElementById('table-wrapper')
+    this._searchButton = document.getElementById('search-box__button')
+    this._orderButtons = {
+      position: 'down',
+      medal_gold: 'down',
+      medal_silver: 'down',
+      medal_bronze: 'down'
+    }
+
+    this.addListener()
   }
 
-  static createTable(tableData) {
+  createTable(tableData) {
     const table = document.createElement('table')
     const tableHead = document.createElement('thead')
     const firstRow = document.createElement('tr')
@@ -22,7 +27,7 @@ class Interface {
     const bronze = document.createElement('th')
     const total = document.createElement('th')
 
-    const posButton = this.createButton('id', 'Posição')
+    const posButton = this.createButton('position', 'Posição')
     const goldButton = this.createButton('medal_gold', 'Ouro')
     const silverButton = this.createButton('medal_silver', 'Prata')
     const bronzeButton = this.createButton('medal_bronze', 'Bronze')
@@ -55,7 +60,7 @@ class Interface {
       const cBronze = document.createElement('td')
       const cTotal = document.createElement('td')
 
-      cPosition.innerText = `${tableData[i].id}°`
+      cPosition.innerText = `${tableData[i].position}°`
       cName.innerHTML = `<img src="${tableData[i].flag_url}" alt="Bandeira do país, ${tableData[i].country}." /> ${tableData[i].country}`
       cGold.innerText = `${tableData[i].medal_gold}`
       cSilver.innerText = `${tableData[i].medal_silver}`
@@ -75,43 +80,43 @@ class Interface {
 
     table.appendChild(tableHead)
     table.appendChild(tableBody)
-    this.tableWrapper.appendChild(table)
+    this._tableWrapper.appendChild(table)
   }
 
-  static createButton(name, text) {
+  createButton(name, text) {
     const button = document.createElement('button')
 
     button.innerText = text
-    button.classList.add(`arrow-${this.orderButtons[name]}`)
+    button.classList.add(`arrow-${this._orderButtons[name]}`)
     button.addEventListener('click', function () {
-      if (this.orderButtons[name] === 'down') {
-        this.orderButtons[name] = 'up'
+      if (this._orderButtons[name] === 'down') {
+        this._orderButtons[name] = 'up'
       } else {
-        this.orderButtons[name] = 'down'
+        this._orderButtons[name] = 'down'
       }
 
       this.resetTables()
       this.createTable(CountryDB.sortBy(
-        CountryDB.findByName(this.countryInput.value),
+        this._database.findByName(this._countryInput.value),
         name,
-        this.orderButtons[name]
+        this._orderButtons[name]
       ))
     }.bind(this))
 
     return button
   }
 
-  static addListener() {
-    this.searchButton.addEventListener('click', function () {
-      const name = this.countryInput.value
-      const tableData = CountryDB.findByName(name)
+  addListener() {
+    this._searchButton.addEventListener('click', function () {
+      const name = this._countryInput.value
+      const tableData = this._database.findByName(name)
       this.resetTables()
       this.createTable(tableData)
     }.bind(this))
   }
 
-  static resetTables() {
-    this.tableWrapper.innerHTML = ''
+  resetTables() {
+    this._tableWrapper.innerHTML = ''
   }
 }
 

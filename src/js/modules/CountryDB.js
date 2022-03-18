@@ -1,11 +1,13 @@
 class CountryDB {
-  static countries = []
-
-  static getAll() {
-    return this.countries
+  constructor(countries) {
+    this._countries = countries
   }
 
-  static findByName(name) {
+  get countries() {
+    return this._countries
+  }
+
+  findByName(name) {
     return this.countries.filter(country =>
       country.country.toLowerCase().includes(name.toLowerCase())
     )
@@ -24,7 +26,23 @@ class CountryDB {
       const response = await fetch('https://kenzie-olympics.herokuapp.com/paises')
       const data = await response.json()
 
-      this.countries = data
+      data.forEach(country => {
+        country.total = country.medal_gold + country.medal_silver + country.medal_bronze
+      })
+
+      data.sort((a, b) => {
+        if (a.total !== b.total) {
+          return b.total - a.total
+        } else {
+          return b.medal_gold - a.medal_gold
+        }
+      })
+
+      data.forEach((country, index) => {
+        country.position = index + 1
+      })
+
+      return data
     } catch (err) {
       alert('Falha ao buscar países!')
     }
